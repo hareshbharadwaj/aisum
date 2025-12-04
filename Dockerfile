@@ -2,6 +2,14 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 
+# Accept build arguments for API keys
+ARG GEMINI_API_KEY
+ARG VITE_GOOGLE_API_KEY
+
+# Pass them as environment variables during build
+ENV GEMINI_API_KEY=${GEMINI_API_KEY}
+ENV VITE_GOOGLE_API_KEY=${VITE_GOOGLE_API_KEY}
+
 # Copy package files and install all dependencies
 COPY package*.json ./
 RUN npm install
