@@ -102,7 +102,7 @@ const AuthPage: React.FC = () => {
                     )}
                             <div className="flex items-center gap-2">
                                 <input id="remember" type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="h-4 w-4" />
-                                <label htmlFor="remember" className="text-sm text-slate-600">Remember me</label>
+                                <label htmlFor="remember" className="text-sm text-slate-600">Rememberingg me</label>
                             </div>
                             <button
                         type="submit"
