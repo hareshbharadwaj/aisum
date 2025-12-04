@@ -1,0 +1,114 @@
+/* Minimal fallback utilities for when Tailwind CDN fails to load.
+	 These rules are scoped under `.no-tailwind` so they only apply when the
+	 Tailwind detection script adds that class to <html>.
+
+	 The goal: make the main UI readable and laid out sensibly without pulling
+	 the entire Tailwind runtime. Keep selectors light and non-invasive so when
+	 Tailwind is present these rules are ignored.
+*/
+
+.no-tailwind {
+	--color-slate-50: #f8fafc;
+	--color-slate-100: #f1f5f9;
+	--color-slate-600: #475569;
+	--color-slate-800: #0f172a;
+	--color-sky-500: #0ea5e9;
+	--color-sky-600: #0284c7;
+	--color-sky-700: #0369a1;
+	--color-red-100: #fee2e2;
+	--color-red-400: #f87171;
+	--color-green-100: #dcfce7;
+	--color-green-400: #34d399;
+}
+
+/* Reset basics */
+.no-tailwind *, .no-tailwind *::before, .no-tailwind *::after { box-sizing: border-box; }
+.no-tailwind body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--color-slate-50); color: var(--color-slate-800); }
+
+/* Layout utilities used across the app */
+.no-tailwind .min-h-screen { min-height: 100vh; }
+.no-tailwind .bg-slate-100 { background-color: var(--color-slate-100); }
+.no-tailwind .bg-white { background-color: white; }
+.no-tailwind .flex { display: flex; }
+.no-tailwind .items-center { align-items: center; }
+.no-tailwind .justify-center { justify-content: center; }
+.no-tailwind .p-4 { padding: 1rem; }
+.no-tailwind .p-8 { padding: 2rem; }
+.no-tailwind .max-w-md { max-width: 28rem; }
+.no-tailwind .w-full { width: 100%; }
+.no-tailwind .rounded-2xl { border-radius: 1rem; }
+.no-tailwind .shadow-lg { box-shadow: 0 10px 15px rgba(2,6,23,0.08); }
+.no-tailwind .space-y-6 > * + * { margin-top: 1.5rem; }
+.no-tailwind .text-center { text-align: center; }
+.no-tailwind .mx-auto { margin-left: auto; margin-right: auto; }
+.no-tailwind .w-12 { width: 3rem; }
+.no-tailwind .h-12 { height: 3rem; }
+
+/* Typography & colors */
+.no-tailwind .text-3xl { font-size: 1.875rem; line-height: 2.25rem; font-weight: 700; }
+.no-tailwind .font-bold { font-weight: 700; }
+.no-tailwind .text-sky-500 { color: var(--color-sky-500); }
+.no-tailwind .text-slate-800 { color: var(--color-slate-800); }
+.no-tailwind .text-slate-600 { color: var(--color-slate-600); }
+.no-tailwind .text-sm { font-size: 0.875rem; }
+.no-tailwind .font-medium { font-weight: 500; }
+
+/* Form controls */
+.no-tailwind input[type="email"],
+.no-tailwind input[type="password"],
+.no-tailwind textarea {
+	border: 1px solid #cbd5e1; /* slate-300 */
+	padding: 0.5rem 0.75rem;
+	border-radius: 0.375rem;
+	width: 100%;
+	background: white;
+	display: block;
+}
+
+.no-tailwind .bg-red-100 { background-color: var(--color-red-100); }
+.no-tailwind .border-red-400 { border-color: var(--color-red-400); }
+.no-tailwind .text-red-700 { color: #b91c1c; }
+.no-tailwind .bg-green-100 { background-color: var(--color-green-100); }
+.no-tailwind .border-green-400 { border-color: var(--color-green-400); }
+.no-tailwind .text-green-700 { color: #065f46; }
+
+/* Buttons */
+.no-tailwind .bg-sky-600 { background-color: var(--color-sky-600); color: white; }
+.no-tailwind .hover\:bg-sky-700:hover { background-color: var(--color-sky-700); }
+.no-tailwind .disabled\:bg-sky-400[disabled], .no-tailwind button[disabled] { background-color: #7dd3fc; opacity: 0.9; cursor: not-allowed; }
+.no-tailwind .rounded-md { border-radius: 0.375rem; }
+.no-tailwind .shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.no-tailwind .text-white { color: white; }
+.no-tailwind .w-full { width: 100%; }
+
+/* Small helpers used in layout */
+.no-tailwind .flex.items-center.gap-2 { gap: 0.5rem; }
+.no-tailwind .flex.justify-center { justify-content: center; }
+
+/* Simple spinner fallback (used by Spinner component) */
+.no-tailwind .spinner {
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	border: 2px solid rgba(0,0,0,0.1);
+	border-top-color: rgba(0,0,0,0.6);
+	border-radius: 9999px;
+	animation: spinner 0.7s linear infinite;
+}
+@keyframes spinner { to { transform: rotate(360deg); } }
+
+/* make sure forms and containers have some spacing */
+.no-tailwind .container { padding: 1rem; }
+
+/* Fallback for utility-style margin/padding-ish classes used inline */
+.no-tailwind .mt-1 { margin-top: 0.25rem; }
+.no-tailwind .mt-2 { margin-top: 0.5rem; }
+.no-tailwind .mt-4 { margin-top: 1rem; }
+.no-tailwind .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+.no-tailwind .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+/* Small responsive helper for smaller screens */
+@media (max-width: 640px) {
+	.no-tailwind .max-w-md { max-width: 100%; padding: 1rem; }
+}
+

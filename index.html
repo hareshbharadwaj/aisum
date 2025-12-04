@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI-Powered Study Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Improved Tailwind detection: poll for an injected utility for up to
+    // 1000ms. Many networks or ad-blockers can delay the CDN script; a short
+    // poll window reduces false positives compared with a single 40ms timeout.
+    (function() {
+      try {
+        var el = document.createElement('div');
+        el.className = 'tw-detect hidden';
+        document.documentElement.appendChild(el);
+
+        var attempts = 0;
+        var maxAttempts = 20; // 20 * 50ms = 1000ms
+        var interval = 50;
+
+        var checker = setInterval(function() {
+          attempts++;
+          var computed = window.getComputedStyle(el);
+          var isHidden = computed && computed.display === 'none';
+          if (isHidden) {
+            // Tailwind applied the 'hidden' utility -> good, stop polling
+            clearInterval(checker);
+            el.remove();
+            return;
+          }
+
+          if (attempts >= maxAttempts) {
+            // Tailwind didn't appear in time; mark no-tailwind so
+            // fallback CSS takes effect.
+            clearInterval(checker);
+            document.documentElement.classList.add('no-tailwind');
+            el.remove();
+          }
+        }, interval);
+
+      } catch (e) {
+        document.documentElement.classList.add('no-tailwind');
+      }
+    })();
+  </script>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.24.0"
+  }
+}
+</script>
+    <!-- Libraries for file parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.min.mjs" type="module"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- Library for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-slate-50">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
